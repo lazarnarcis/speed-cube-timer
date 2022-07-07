@@ -1,10 +1,25 @@
-let paragraph = document.querySelector("#demo");
+let algorithm = document.querySelector("#algorithm");
 let basicMoves = ["F", "R", "B", "L", "U", "D", "M", "E", "S"];
 let apostropheMoves = [];
 let doubleMoves = [];
 let rotations = ["x", "y", "z"];
 let bigMoves = [];
 let maxMoves = 25;
+let action;
+let body = document.body;
+let time = document.querySelector("#time");
+let start = false;
+let timeS = 0;
+let interval;
+let statistics = document.querySelector("#mainStatistics");
+let storedTime = localStorage.getItem("storedTime") || [];
+let averageDiv = document.querySelector("#average");
+let average = 0;
+let averageP = document.querySelector("#averageP");
+
+if (storedTime.length != 0) {
+    storedTime = JSON.parse(storedTime);
+}
 
 for (let i = 0; i < basicMoves.length; i++) {
     let newMove = basicMoves[i] + "'";
@@ -20,6 +35,23 @@ for (let z = 0; z < basicMoves.length - 3; z++) {
     let newMove = basicMoves[z] + "w";
     bigMoves = [...bigMoves, newMove];
 }
+
+makeAverage();
+
+function makeAverage () {
+    if (storedTime.length != 0) {
+        average = 0;
+        averageP.innerHTML = "";
+        for (let y = 0; y < storedTime.length; y++) {
+            average += Number(storedTime[y]);
+        }
+        average = average / storedTime.length;
+        averageP.innerText = Number(average).toFixed(2) + "s";
+        averageDiv.appendChild(averageP);
+    }
+}
+
+generateAlg();
 
 function generateAlg() {
     let string = "";
@@ -49,6 +81,62 @@ function generateAlg() {
         let randomChar = myString[Math.floor((Math.random() * arrayLength) + 0)];
         string = string + randomChar + " ";
     }
-
-    paragraph.innerText = string;
+    algorithm.innerText = string;
 }
+
+document.addEventListener("keydown", (e) => {
+    if (e.keyCode == 32) {
+        if (start == false) {
+            time.style.color = "red";
+        }
+    }
+});
+
+function makeInterval () {
+    timeS++;
+    timeS = timeS.toFixed(2);
+    time.innerText = timeS + "s";
+    interval = setTimeout(makeInterval, 1000);
+}
+
+function showStatistics () {
+    statistics.innerHTML = "";
+    for (let i = 0; i < storedTime.length; i++) {
+        let divStatistics = document.createElement("div");
+        divStatistics.id = "divStatistics";
+        let newStatistics = document.createElement("p");
+        newStatistics.id = "timeStatis";
+        let idStatistics = document.createElement("p");
+        newStatistics.innerText = storedTime[i] + "s";
+        idStatistics.innerText = i + 1 + ".";
+        divStatistics.appendChild(idStatistics);
+        divStatistics.appendChild(newStatistics);
+        statistics.appendChild(divStatistics);
+    }
+}
+
+showStatistics();
+
+document.addEventListener("keyup", (e) => {
+    if (e.keyCode == 32) {
+        time.style.color = "black";
+        body.style.backgroundColor = "lightgreen";
+        if (start == true) {
+            start = false;
+            time.style.color = "black";
+            body.style.backgroundColor = "rgb(188, 98, 113)";
+            storedTime = [...storedTime, timeS];
+            localStorage.setItem("storedTime", JSON.stringify(storedTime));
+            timeS = Number(0).toFixed(2);
+            time.innerText = timeS + "s";
+            generateAlg();
+            showStatistics();
+            makeAverage();
+            clearInterval(interval);
+        } else if (start == false) { 
+            makeInterval();
+            start = true;
+            algorithm.innerText = "";
+        }
+    }
+});
