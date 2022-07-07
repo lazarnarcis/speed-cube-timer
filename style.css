@@ -30,6 +30,12 @@ body {
     text-align: center;
 }
 
+#text {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(32, 76, 137);
+}
+
 #average {
     margin: 20px;
 }
