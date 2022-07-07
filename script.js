@@ -16,7 +16,7 @@ for (let y = 0; y < basicMoves.length; y++) {
     doubleMoves = [...doubleMoves, newMove];
 }
 
-for (let z = 0; z < basicMoves.length; z++) {
+for (let z = 0; z < basicMoves.length - 3; z++) {
     let newMove = basicMoves[z] + "w";
     bigMoves = [...bigMoves, newMove];
 }
