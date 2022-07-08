@@ -22,20 +22,16 @@ if (storedTime.length != 0) {
     storedTime = JSON.parse(storedTime);
 }
 
-let ascTime = [];
 function makeAscending () {
     topHTML.innerHTML = "";
     let divScore = document.createElement("div");
     let bestScore = document.createElement("p"), badScore = document.createElement("p");
     if (storedTime.length != 0) {
-        for (let p = 0; p < storedTime.length; p++) {
-            ascTime = [...ascTime, Number(storedTime[p])];
-        }
-        ascTime.sort((a, b) => {
+        storedTime.sort((a, b) => {
             return a - b;
         });
-        bestScore.innerText = "Best Score: " + Number(ascTime[0]).toFixed(2) + "s";
-        badScore.innerText = "Bad Score: " + Number(ascTime[ascTime.length - 1]).toFixed(2) + "s";
+        bestScore.innerText = "Best Score: " + Number(storedTime[0]).toFixed(2) + "s";
+        badScore.innerText = "Bad Score: " + Number(storedTime[storedTime.length - 1]).toFixed(2) + "s";
     } else {
         bestScore.innerText = "Best Score: 0s";
         badScore.innerText = "Bad Score: 0s";
