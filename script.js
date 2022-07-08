@@ -22,6 +22,34 @@ if (storedTime.length != 0) {
     storedTime = JSON.parse(storedTime);
 }
 
+for (let i = 0; i < basicMoves.length; i++) {
+    let newMove = basicMoves[i] + "'";
+    apostropheMoves = [...apostropheMoves, newMove];
+}
+
+for (let y = 0; y < basicMoves.length; y++) {
+    let newMove = basicMoves[y] + "2";
+    doubleMoves = [...doubleMoves, newMove];
+}
+
+for (let z = 0; z < basicMoves.length - 3; z++) {
+    let newMove = basicMoves[z] + "w";
+    bigMoves = [...bigMoves, newMove];
+}
+
+function makeAverage () {
+    if (storedTime.length != 0) {
+        average = 0;
+        averageP.innerHTML = "";
+        for (let y = 0; y < storedTime.length; y++) {
+            average += Number(storedTime[y]);
+        }
+        average = average / storedTime.length;
+        averageP.innerText = Number(average).toFixed(2) + "s";
+        averageDiv.appendChild(averageP);
+    }
+}
+
 function makeAscending () {
     topHTML.innerHTML = "";
     let divScore = document.createElement("div");
@@ -43,40 +71,6 @@ function makeAscending () {
     topHTML.appendChild(divScore);
 }
 
-makeAscending();
-
-for (let i = 0; i < basicMoves.length; i++) {
-    let newMove = basicMoves[i] + "'";
-    apostropheMoves = [...apostropheMoves, newMove];
-}
-
-for (let y = 0; y < basicMoves.length; y++) {
-    let newMove = basicMoves[y] + "2";
-    doubleMoves = [...doubleMoves, newMove];
-}
-
-for (let z = 0; z < basicMoves.length - 3; z++) {
-    let newMove = basicMoves[z] + "w";
-    bigMoves = [...bigMoves, newMove];
-}
-
-makeAverage();
-
-function makeAverage () {
-    if (storedTime.length != 0) {
-        average = 0;
-        averageP.innerHTML = "";
-        for (let y = 0; y < storedTime.length; y++) {
-            average += Number(storedTime[y]);
-        }
-        average = average / storedTime.length;
-        averageP.innerText = Number(average).toFixed(2) + "s";
-        averageDiv.appendChild(averageP);
-    }
-}
-
-generateAlg();
-
 function generateAlg() {
     let string = "";
     for (let p = 0; p < maxMoves; p++) {
@@ -88,14 +82,6 @@ function generateAlg() {
     algorithm.innerText = string;
     algorithm.style.padding = "10px 0";
 }
-
-document.addEventListener("keydown", (e) => {
-    if (e.keyCode == 32) {
-        if (start == false) {
-            time.style.color = "red";
-        }
-    }
-});
 
 function makeInterval () {
     timeS++;
@@ -125,6 +111,17 @@ function showStatistics () {
 }
 
 showStatistics();
+generateAlg();
+makeAscending();
+makeAverage();
+
+document.addEventListener("keydown", (e) => {
+    if (e.keyCode == 32) {
+        if (start == false) {
+            time.style.color = "red";
+        }
+    }
+});
 
 document.addEventListener("keyup", (e) => {
     if (e.keyCode == 32) {
