@@ -4,7 +4,7 @@ let apostropheMoves = [];
 let doubleMoves = [];
 let rotations = ["x", "y", "z"];
 let bigMoves = [];
-let maxMoves = 25;
+let maxMoves = 17;
 let action;
 let body = document.body;
 let time = document.querySelector("#time");
@@ -80,29 +80,9 @@ generateAlg();
 function generateAlg() {
     let string = "";
     for (let p = 0; p < maxMoves; p++) {
-        let randomMove = Math.floor((Math.random() * 5) + 1);
-        let myString = [];
-
-        switch (randomMove) {
-            case 1: 
-                myString = basicMoves;
-                break;
-            case 2:
-                myString = apostropheMoves;
-                break;
-            case 3:
-                myString = doubleMoves;
-                break;
-            case 4:
-                myString = rotations;
-                break;
-            default:
-                myString = bigMoves;
-                break;
-        }
-
-        let arrayLength = myString.length;
-        let randomChar = myString[Math.floor((Math.random() * arrayLength) + 0)];
+        let all = [...basicMoves, ...apostropheMoves, ...doubleMoves, ...rotations, ...bigMoves];
+        let arrayLength = all.length;
+        let randomChar = all[Math.floor((Math.random() * arrayLength) + 0)];
         string = string + randomChar + " ";
     }
     algorithm.innerText = string;
