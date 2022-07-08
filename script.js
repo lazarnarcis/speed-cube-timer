@@ -106,6 +106,7 @@ function generateAlg() {
         string = string + randomChar + " ";
     }
     algorithm.innerText = string;
+    algorithm.style.padding = "10px 0";
 }
 
 document.addEventListener("keydown", (e) => {
@@ -166,6 +167,7 @@ document.addEventListener("keyup", (e) => {
             makeInterval();
             start = true;
             algorithm.innerText = "";
+            algorithm.style.padding = "0";
         }
     }
 });
