@@ -1,6 +1,6 @@
 let algorithm = document.querySelector("#algorithm");
 let basicMoves = ["F", "R", "B", "L", "U", "D", "M", "E", "S"];
-let apostropheMoves = [], bigMoves = [], doubleMoves = [];
+let apostropheMoves = [], bigMoves = [], doubleMoves = [], ascTime = [];
 let rotations = ["x", "y", "z"];
 let maxMoves = 17, average = 0;
 let body = document.body;
@@ -45,8 +45,6 @@ function makeAverage () {
         averageDiv.appendChild(averageP);
     }
 }
-
-let ascTime = [];
 
 function makeAscending () {
     topHTML.innerHTML = "";
