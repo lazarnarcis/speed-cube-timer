@@ -9,7 +9,7 @@ let action;
 let body = document.body;
 let time = document.querySelector("#time");
 let start = false;
-let timeS = 0;
+let totalTime = 0, seconds = 0, miliseconds = 0;;
 let interval;
 let statistics = document.querySelector("#mainStatistics");
 let storedTime = localStorage.getItem("storedTime") || [];
@@ -89,8 +89,6 @@ function generateAlg() {
     algorithm.style.padding = "10px 0";
 }
 
-let seconds = 0, miliseconds = 0;
-
 function makeInterval () {
     miliseconds++;
     if (miliseconds <= 9) {
@@ -100,8 +98,8 @@ function makeInterval () {
         seconds++;
         miliseconds = "00";
     }
-    timeS = seconds + "." + miliseconds;
-    time.innerText = timeS + "s";
+    totalTime = seconds + "." + miliseconds;
+    time.innerText = totalTime + "s";
     interval = setTimeout(makeInterval, 10);
 }
 
@@ -132,12 +130,12 @@ function onKeyUp() {
         start = false;
         time.style.color = "black";
         body.style.backgroundColor = "rgb(198, 162, 168)";
-        storedTime = [...storedTime, timeS];
+        storedTime = [...storedTime, totalTime];
         seconds = 0;
         miliseconds = 0;
         localStorage.setItem("storedTime", JSON.stringify(storedTime));
-        timeS = Number(0).toFixed(2);
-        time.innerText = timeS + "s";
+        totalTime = Number(0).toFixed(2);
+        time.innerText = totalTime + "s";
         startStop.innerText = "Start";
         generateAlg();
         showStatistics();
