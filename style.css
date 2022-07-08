@@ -23,17 +23,18 @@ body {
 }
 
 #mainStatistics {
-    max-height: 300px;
+    text-align: center;
+    height: 300px;
     background-color: rgb(88, 182, 155);
     overflow-x: hidden;
     padding: 5px;
+    width: 200px;
 }
 
 #divStatistics {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 200px;
 }
 
 #text {
