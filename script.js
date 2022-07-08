@@ -126,15 +126,11 @@ startStop.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (e) => {
-    if (e.keyCode == 32) {
-        onKeyDown();
-    }
+    if (e.keyCode == 32) onKeyDown();
 });
 
 document.addEventListener("keyup", (e) => {
-    if (e.keyCode == 32) {
-        onKeyUp();
-    }
+    if (e.keyCode == 32) onKeyUp();
 });
 
 function onKeyUp() {
