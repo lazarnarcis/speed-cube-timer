@@ -116,23 +116,6 @@ function showStatistics () {
     }
 }
 
-showStatistics();
-generateAlg();
-makeAscending();
-makeAverage();
-
-startStop.addEventListener("click", () => {
-    onKeyUp();
-});
-
-document.addEventListener("keydown", (e) => {
-    if (e.keyCode == 32) onKeyDown();
-});
-
-document.addEventListener("keyup", (e) => {
-    if (e.keyCode == 32) onKeyUp();
-});
-
 function onKeyUp() {
     time.style.color = "black";
     body.style.backgroundColor = "lightgreen";
@@ -164,3 +147,20 @@ function onKeyDown() {
         time.style.color = "red";
     }
 }
+
+showStatistics();
+generateAlg();
+makeAscending();
+makeAverage();
+
+startStop.addEventListener("click", () => {
+    onKeyUp();
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.keyCode == 32) onKeyDown();
+});
+
+document.addEventListener("keyup", (e) => {
+    if (e.keyCode == 32) onKeyUp();
+});
