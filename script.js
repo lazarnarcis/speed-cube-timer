@@ -34,8 +34,8 @@ function makeAscending () {
         ascTime.sort((a, b) => {
             return a - b;
         });
-        bestScore.innerText = "Best Score: " + Number(ascTime[ascTime.length - 1]).toFixed(2) + "s";
-        badScore.innerText = "Bad Score: " + Number(ascTime[0]).toFixed(2) + "s";
+        bestScore.innerText = "Best Score: " + Number(ascTime[0]).toFixed(2) + "s";
+        badScore.innerText = "Bad Score: " + Number(ascTime[ascTime.length - 1]).toFixed(2) + "s";
     } else {
         bestScore.innerText = "Best Score: 0s";
         badScore.innerText = "Bad Score: 0s";
