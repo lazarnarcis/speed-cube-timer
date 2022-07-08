@@ -50,7 +50,7 @@ body {
     font-weight: bold;
 }
 
-#averageP {
+.averageP {
     font-size: 70px;
 }
 
@@ -93,7 +93,7 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     #all {
         display: flex;
         flex-direction: column;

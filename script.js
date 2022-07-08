@@ -13,6 +13,7 @@ let averageDiv = document.querySelector("#average");
 let averageP = document.querySelector("#averageP");
 let topHTML = document.querySelector("#mainTop");
 let startStop = document.querySelector("#startStop");
+let lastScore = document.querySelector("#lastScore");
 
 if (storedTime.length != 0) {
     storedTime = JSON.parse(storedTime);
@@ -43,6 +44,13 @@ function makeAverage () {
         average = average / storedTime.length;
         averageP.innerText = Number(average).toFixed(2) + "s";
         averageDiv.appendChild(averageP);
+    }
+}
+
+function setLastScore () {
+    lastScore.innerText = "0.00s";
+    if (storedTime.length != 0) {
+        lastScore.innerText = storedTime[storedTime.length - 1] + "s";
     }
 }
 
@@ -133,6 +141,7 @@ function onKeyUp() {
         showStatistics();
         makeAverage();
         makeAscending();
+        setLastScore();
         clearInterval(interval);
     } else if (start == false) {
         interval = setInterval(makeInterval, 10);
@@ -159,6 +168,7 @@ showStatistics();
 generateAlg();
 makeAscending();
 makeAverage();
+setLastScore();
 
 startStop.addEventListener("click", () => {
     onKeyUp();
