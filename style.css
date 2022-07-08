@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    user-select: none;
 }
 
 body {
@@ -84,7 +83,7 @@ body {
 }
 
 #startStop {
-    padding: 7px;
+    padding: 15px;
     cursor: pointer;
     background: rgb(24, 107, 130);
     color: white;
