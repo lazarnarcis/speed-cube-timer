@@ -34,9 +34,9 @@ for (let z = 0; z < basicMoves.length - 3; z++) {
 }
 
 function makeAverage () {
+    average = 0;
+    averageP.innerHTML = "0.00s";
     if (storedTime.length != 0) {
-        average = 0;
-        averageP.innerHTML = "";
         for (let y = 0; y < storedTime.length; y++) {
             average += Number(storedTime[y]);
         }
@@ -141,6 +141,12 @@ function onKeyUp() {
         startStop.innerText = "Stop";
         algorithm.style.padding = "0";
     }
+}
+
+function resetScores () {
+    storedTime = [];
+    localStorage.setItem("storedTime", JSON.stringify(storedTime));
+    window.location.reload();
 }
 
 function onKeyDown() {

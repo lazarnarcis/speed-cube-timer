@@ -84,7 +84,8 @@ body {
 }
 
 #startStop {
-    padding: 12.5px;
+    padding: 7px;
+    cursor: pointer;
     background: rgb(24, 107, 130);
     color: white;
     border: none;
