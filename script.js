@@ -93,7 +93,6 @@ function makeInterval () {
     }
     totalTime = seconds + "." + miliseconds;
     time.innerText = totalTime + "s";
-    interval = setTimeout(makeInterval, 10);
 }
 
 function showStatistics () {
@@ -136,7 +135,7 @@ function onKeyUp() {
         makeAscending();
         clearInterval(interval);
     } else if (start == false) {
-        makeInterval();
+        interval = setInterval(makeInterval, 10);
         start = true;
         algorithm.innerText = "";
         startStop.innerText = "Stop";
