@@ -89,11 +89,20 @@ function generateAlg() {
     algorithm.style.padding = "10px 0";
 }
 
+let seconds = 0, miliseconds = 0;
+
 function makeInterval () {
-    timeS++;
-    timeS = timeS.toFixed(2);
+    miliseconds++;
+    if (miliseconds <= 9) {
+        miliseconds = "0" + miliseconds;
+    }
+    if (miliseconds > 99) {
+        seconds++;
+        miliseconds = "00";
+    }
+    timeS = seconds + "." + miliseconds;
     time.innerText = timeS + "s";
-    interval = setTimeout(makeInterval, 1000);
+    interval = setTimeout(makeInterval, 10);
 }
 
 function showStatistics () {
@@ -124,6 +133,8 @@ function onKeyUp() {
         time.style.color = "black";
         body.style.backgroundColor = "rgb(198, 162, 168)";
         storedTime = [...storedTime, timeS];
+        seconds = 0;
+        miliseconds = 0;
         localStorage.setItem("storedTime", JSON.stringify(storedTime));
         timeS = Number(0).toFixed(2);
         time.innerText = timeS + "s";
