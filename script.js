@@ -16,10 +16,38 @@ let storedTime = localStorage.getItem("storedTime") || [];
 let averageDiv = document.querySelector("#average");
 let average = 0;
 let averageP = document.querySelector("#averageP");
+let topHTML = document.querySelector("#mainTop");
 
 if (storedTime.length != 0) {
     storedTime = JSON.parse(storedTime);
 }
+
+let ascTime = [];
+function makeAscending () {
+    topHTML.innerHTML = "";
+    let divScore = document.createElement("div");
+    let bestScore = document.createElement("p"), badScore = document.createElement("p");
+    if (storedTime.length != 0) {
+        for (let p = 0; p < storedTime.length; p++) {
+            ascTime = [...ascTime, Number(storedTime[p])];
+        }
+        ascTime.sort((a, b) => {
+            return a - b;
+        });
+        bestScore.innerText = "Best Score: " + Number(ascTime[ascTime.length - 1]).toFixed(2) + "s";
+        badScore.innerText = "Bad Score: " + Number(ascTime[0]).toFixed(2) + "s";
+    } else {
+        bestScore.innerText = "Best Score: 0s";
+        badScore.innerText = "Bad Score: 0s";
+    }
+    bestScore.id = "bestScore";
+    badScore.id = "badScore";
+    divScore.appendChild(bestScore);
+    divScore.appendChild(badScore);
+    topHTML.appendChild(divScore);
+}
+
+makeAscending();
 
 for (let i = 0; i < basicMoves.length; i++) {
     let newMove = basicMoves[i] + "'";
@@ -101,17 +129,21 @@ function makeInterval () {
 
 function showStatistics () {
     statistics.innerHTML = "";
-    for (let i = 0; i < storedTime.length; i++) {
-        let divStatistics = document.createElement("div");
-        divStatistics.id = "divStatistics";
-        let newStatistics = document.createElement("p");
-        newStatistics.id = "timeStatis";
-        let idStatistics = document.createElement("p");
-        newStatistics.innerText = storedTime[i] + "s";
-        idStatistics.innerText = i + 1 + ".";
-        divStatistics.appendChild(idStatistics);
-        divStatistics.appendChild(newStatistics);
-        statistics.appendChild(divStatistics);
+    if (storedTime.length != 0) {
+        for (let i = 0; i < storedTime.length; i++) {
+            let divStatistics = document.createElement("div");
+            divStatistics.id = "divStatistics";
+            let newStatistics = document.createElement("p");
+            newStatistics.id = "timeStatis";
+            let idStatistics = document.createElement("p");
+            newStatistics.innerText = storedTime[i] + "s";
+            idStatistics.innerText = i + 1 + ".";
+            divStatistics.appendChild(idStatistics);
+            divStatistics.appendChild(newStatistics);
+            statistics.appendChild(divStatistics);
+        }
+    } else {
+        statistics.innerHTML = "<p>Not yet!</p>";
     }
 }
 
@@ -124,7 +156,7 @@ document.addEventListener("keyup", (e) => {
         if (start == true) {
             start = false;
             time.style.color = "black";
-            body.style.backgroundColor = "rgb(188, 98, 113)";
+            body.style.backgroundColor = "rgb(198, 162, 168)";
             storedTime = [...storedTime, timeS];
             localStorage.setItem("storedTime", JSON.stringify(storedTime));
             timeS = Number(0).toFixed(2);
@@ -132,6 +164,7 @@ document.addEventListener("keyup", (e) => {
             generateAlg();
             showStatistics();
             makeAverage();
+            makeAscending();
             clearInterval(interval);
         } else if (start == false) { 
             makeInterval();
