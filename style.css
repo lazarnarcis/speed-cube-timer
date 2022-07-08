@@ -16,7 +16,9 @@ body {
 
 #initialTitle {
     text-align: center;
-    color: rgb(7, 47, 107);
+    color: rgb(87, 57, 235);
+    margin: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 #textStatistics {
@@ -77,15 +79,35 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#divStartStop {
+    display: none;
+}
+
+#startStop {
+    padding: 12.5px;
+    background: rgb(24, 107, 130);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 @media screen and (max-width: 600px) {
     #all {
         display: flex;
         flex-direction: column;
+    }
+    #divStartStop {
+        display: block;
+        text-align: center;
     }
     #algorithm {
         position: relative;
     }
     #all > div {
         margin: 25px 0;
+    }
+    #text {
+        display: none;
     }
 }

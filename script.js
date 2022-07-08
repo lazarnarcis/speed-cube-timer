@@ -17,6 +17,7 @@ let averageDiv = document.querySelector("#average");
 let average = 0;
 let averageP = document.querySelector("#averageP");
 let topHTML = document.querySelector("#mainTop");
+let startStop = document.querySelector("#startStop");
 
 if (storedTime.length != 0) {
     storedTime = JSON.parse(storedTime);
@@ -120,36 +121,50 @@ generateAlg();
 makeAscending();
 makeAverage();
 
+startStop.addEventListener("click", () => {
+    onKeyUp();
+});
+
 document.addEventListener("keydown", (e) => {
     if (e.keyCode == 32) {
-        if (start == false) {
-            time.style.color = "red";
-        }
+        onKeyDown();
     }
 });
 
 document.addEventListener("keyup", (e) => {
     if (e.keyCode == 32) {
-        time.style.color = "black";
-        body.style.backgroundColor = "lightgreen";
-        if (start == true) {
-            start = false;
-            time.style.color = "black";
-            body.style.backgroundColor = "rgb(198, 162, 168)";
-            storedTime = [...storedTime, timeS];
-            localStorage.setItem("storedTime", JSON.stringify(storedTime));
-            timeS = Number(0).toFixed(2);
-            time.innerText = timeS + "s";
-            generateAlg();
-            showStatistics();
-            makeAverage();
-            makeAscending();
-            clearInterval(interval);
-        } else if (start == false) { 
-            makeInterval();
-            start = true;
-            algorithm.innerText = "";
-            algorithm.style.padding = "0";
-        }
+        onKeyUp();
     }
 });
+
+function onKeyUp() {
+    time.style.color = "black";
+    body.style.backgroundColor = "lightgreen";
+    if (start == true) {
+        start = false;
+        time.style.color = "black";
+        body.style.backgroundColor = "rgb(198, 162, 168)";
+        storedTime = [...storedTime, timeS];
+        localStorage.setItem("storedTime", JSON.stringify(storedTime));
+        timeS = Number(0).toFixed(2);
+        time.innerText = timeS + "s";
+        startStop.innerText = "Start";
+        generateAlg();
+        showStatistics();
+        makeAverage();
+        makeAscending();
+        clearInterval(interval);
+    } else if (start == false) {
+        makeInterval();
+        start = true;
+        algorithm.innerText = "";
+        startStop.innerText = "Stop";
+        algorithm.style.padding = "0";
+    }
+}
+
+function onKeyDown() {
+    if (start == false) {
+        time.style.color = "red";
+    }
+}
