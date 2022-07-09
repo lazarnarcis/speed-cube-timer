@@ -33,6 +33,18 @@ body {
     width: 200px;
 }
 
+#deleteStatistics {
+    color: red;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding: 2.5px;
+    margin: 0;
+    cursor: pointer;
+}
+
+#deleteStatistics:hover {
+    background-color: lightgoldenrodyellow;
+}
+
 #divStatistics {
     display: flex;
     justify-content: space-between;

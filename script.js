@@ -1,6 +1,6 @@
 let algorithm = document.querySelector("#algorithm");
 let basicMoves = ["F", "R", "B", "L", "U", "D", "M", "E", "S"];
-let apostropheMoves = [], bigMoves = [], doubleMoves = [], ascTime = [];
+let apostropheMoves = [], bigMoves = [], doubleMoves = [];
 let rotations = ["x", "y", "z"];
 let maxMoves = 17, average = 0;
 let body = document.body;
@@ -59,6 +59,7 @@ function makeAscending () {
     let divScore = document.createElement("div");
     let bestScore = document.createElement("p"), badScore = document.createElement("p");
     if (storedTime.length != 0) {
+        let ascTime = [];
         for (let p = 0; p < storedTime.length; p++) {
             ascTime = [...ascTime, Number(storedTime[p])];
         }
@@ -112,10 +113,22 @@ function showStatistics () {
             let newStatistics = document.createElement("p");
             newStatistics.id = "timeStatis";
             let idStatistics = document.createElement("p");
+            let deleteStatistics = document.createElement("p");
+            deleteStatistics.innerText = "x";
+            deleteStatistics.id = "deleteStatistics";
+            deleteStatistics.addEventListener("click", () => {
+                storedTime.splice(i, 1);
+                localStorage.setItem("storedTime", JSON.stringify(storedTime));
+                showStatistics();
+                makeAscending();
+                makeAverage();
+                setLastScore();
+            });
             newStatistics.innerText = storedTime[i] + "s";
             idStatistics.innerText = i + 1 + ".";
             divStatistics.appendChild(idStatistics);
             divStatistics.appendChild(newStatistics);
+            divStatistics.appendChild(deleteStatistics);
             statistics.appendChild(divStatistics);
         }
     } else {
