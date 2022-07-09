@@ -29,8 +29,8 @@ body {
     height: 300px;
     background-color: rgb(88, 182, 155);
     overflow-x: hidden;
-    padding: 5px;
-    width: 200px;
+    padding: 15px;
+    width: 150px;
 }
 
 #deleteStatistics {
